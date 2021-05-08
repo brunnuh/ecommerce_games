@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class AppBarWidget extends PreferredSize {
   @override
-  Size get preferredSize => Size.fromHeight(200);
+  Size get preferredSize => Size.fromHeight(190);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class AppBarWidget extends PreferredSize {
             ),
             child: TextField(
               decoration: InputDecoration(
-                  hintText: "Buscar produto",
+                  hintText: "Buscar Jogo",
                   border: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   icon: Icon(
