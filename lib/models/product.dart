@@ -5,9 +5,17 @@ class Product {
   int score;
   String image;
   String content;
+  int qtd;
 
-  Product(
-      {this.id, this.name, this.price, this.score, this.image, this.content});
+  Product({
+    this.id,
+    this.name,
+    this.price,
+    this.score,
+    this.image,
+    this.content,
+    this.qtd,
+  });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
@@ -17,6 +25,7 @@ class Product {
       price: json["price"],
       score: json["score"],
       content: json["content"],
+      qtd: 1,
     );
   }
 

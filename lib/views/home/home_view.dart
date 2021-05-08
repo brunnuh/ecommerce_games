@@ -6,32 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
-class HomeView extends StatefulWidget {
-  @override
-  _HomeViewState createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
+class HomeView extends StatelessWidget {
   ProductController productController = GetIt.I<ProductController>();
-
-  @override
-  void initState() {
-    super.initState();
-    productController.getProducts();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: IconButton(
-        icon: Icon(Icons.title),
-        onPressed: () {
-          productController.getProducts();
-        },
-      ),
       appBar: AppBarWidget(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Observer(
           builder: (_) {
             return productController.listProducts.isNotEmpty

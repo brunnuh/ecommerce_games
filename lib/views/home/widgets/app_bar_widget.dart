@@ -76,7 +76,10 @@ class AppBarWidget extends PreferredSize {
                                     trailing: Observer(
                                       builder: (_) => Icon(
                                         productController.filterOrderBy ==
-                                                FilterOrderBy.DOWN
+                                                    FilterOrderBy.DOWN &&
+                                                productController
+                                                        .filterTypeActive ==
+                                                    whatFilterActive.PRICE
                                             ? LineIcons.sortNumericDown
                                             : LineIcons.sortNumericUp,
                                       ),
@@ -84,11 +87,24 @@ class AppBarWidget extends PreferredSize {
                                   ),
                                 ),
                                 InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    productController.filterScore();
+                                    Navigator.of(context).pop();
+                                  },
                                   child: ListTile(
                                     leading: Icon(LineIcons.star),
                                     title: Text("Popularidade"),
-                                    trailing: Icon(LineIcons.sortAmountDown),
+                                    trailing: Observer(
+                                      builder: (_) => Icon(
+                                        productController.filterOrderBy ==
+                                                    FilterOrderBy.DOWN &&
+                                                productController
+                                                        .filterTypeActive ==
+                                                    whatFilterActive.SCORE
+                                            ? LineIcons.sortAmountDown
+                                            : LineIcons.sortAmountUp,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 InkWell(
@@ -99,8 +115,17 @@ class AppBarWidget extends PreferredSize {
                                   child: ListTile(
                                     leading: Icon(LineIcons.font),
                                     title: Text("Nome"),
-                                    trailing:
-                                        Icon(LineIcons.sortAlphabeticalDown),
+                                    trailing: Observer(
+                                      builder: (_) => Icon(
+                                        productController.filterOrderBy ==
+                                                    FilterOrderBy.DOWN &&
+                                                productController
+                                                        .filterTypeActive ==
+                                                    whatFilterActive.NAME
+                                            ? LineIcons.sortAlphabeticalDown
+                                            : LineIcons.sortAlphabeticalUp,
+                                      ),
+                                    ),
                                   ),
                                 )
                               ],

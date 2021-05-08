@@ -70,6 +70,21 @@ mixin _$ProductController on _ProductController, Store {
     });
   }
 
+  final _$downScoreAtom = Atom(name: '_ProductController.downScore');
+
+  @override
+  bool get downScore {
+    _$downScoreAtom.reportRead();
+    return super.downScore;
+  }
+
+  @override
+  set downScore(bool value) {
+    _$downScoreAtom.reportWrite(value, super.downScore, () {
+      super.downScore = value;
+    });
+  }
+
   final _$getProductsAsyncAction =
       AsyncAction('_ProductController.getProducts');
 
@@ -104,12 +119,46 @@ mixin _$ProductController on _ProductController, Store {
   }
 
   @override
+  void filterScore() {
+    final _$actionInfo = _$_ProductControllerActionController.startAction(
+        name: '_ProductController.filterScore');
+    try {
+      return super.filterScore();
+    } finally {
+      _$_ProductControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addCart(Product product) {
+    final _$actionInfo = _$_ProductControllerActionController.startAction(
+        name: '_ProductController.addCart');
+    try {
+      return super.addCart(product);
+    } finally {
+      _$_ProductControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeCart(Product product) {
+    final _$actionInfo = _$_ProductControllerActionController.startAction(
+        name: '_ProductController.removeCart');
+    try {
+      return super.removeCart(product);
+    } finally {
+      _$_ProductControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 filterTypeActive: ${filterTypeActive},
 filterOrderBy: ${filterOrderBy},
 downPrice: ${downPrice},
-downName: ${downName}
+downName: ${downName},
+downScore: ${downScore}
     ''';
   }
 }

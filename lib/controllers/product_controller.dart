@@ -13,6 +13,10 @@ enum FilterOrderBy { NONE, UP, DOWN }
 enum whatFilterActive { DEFAULT, PRICE, NAME, SCORE }
 
 abstract class _ProductController with Store {
+  _ProductController() {
+    getProducts();
+  }
+
   // Observers
   ObservableList<Product> listProducts = ObservableList<Product>();
 
@@ -28,7 +32,6 @@ abstract class _ProductController with Store {
   @action
   Future<void> getProducts() async {
     listProducts.clear();
-    await Future.delayed(Duration(seconds: 2));
     final String productsJson = await _loadJson();
     final productsDecode = json.decode(productsJson);
     List<Product> products = [];
@@ -52,6 +55,8 @@ abstract class _ProductController with Store {
 
   @action
   void filterPrice() {
+    downName = true;
+    downScore = true;
     filterTypeActive = whatFilterActive.PRICE;
 
     if (downPrice && filterOrderBy != FilterOrderBy.DOWN) {
@@ -82,6 +87,9 @@ abstract class _ProductController with Store {
 
   @action
   void filterName() {
+    downPrice = true;
+    downScore = true;
+
     filterTypeActive = whatFilterActive.NAME;
 
     if (downName && filterOrderBy != FilterOrderBy.DOWN) {
@@ -97,6 +105,61 @@ abstract class _ProductController with Store {
     }
   }
 
-  //Computed
+  @observable
+  bool downScore = true;
+
+  @action
+  void filterScore() {
+    downPrice = true;
+    downName = true;
+
+    filterTypeActive = whatFilterActive.SCORE;
+
+    if (downName && filterOrderBy != FilterOrderBy.DOWN) {
+      filterOrderBy = FilterOrderBy.DOWN;
+      listProducts.sort(
+        (a, b) {
+          if (a.score > b.score) {
+            return 1;
+          }
+          return -1;
+        },
+      );
+    } else {
+      filterOrderBy = FilterOrderBy.UP;
+      listProducts.sort(
+        (a, b) {
+          if (a.score < b.score) {
+            return 1;
+          }
+          return -1;
+        },
+      );
+    }
+  }
+
+  ObservableList<Product> cartCheckout = ObservableList<Product>();
+
+  @action
+  void addCart(Product product) {
+    if (cartCheckout.contains(product)) {
+      // remover elemento duplicado da lista
+      Product productDouble = cartCheckout.removeAt(
+          cartCheckout.indexWhere((element) => element.id == product.id));
+      // adicionar mais 1 pra ele
+      productDouble.qtd = productDouble.qtd + 1;
+      //adicionar a lista novamente
+      cartCheckout.add(productDouble);
+    } else {
+      cartCheckout.add(product);
+    }
+  }
+
+  @action
+  void removeCart(Product product) {
+    cartCheckout.remove(product);
+  }
+
+//Computed
 
 }

@@ -39,6 +39,16 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
+      onGenerateRoute: (settings) {
+        final args = settings.arguments;
+        switch (settings.name) {
+          case "HomeView":
+          default:
+            return MaterialPageRoute(
+              builder: (_) => HomeView(),
+            );
+        }
+      },
       home: HomeView(),
     );
   }
