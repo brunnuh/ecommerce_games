@@ -4,6 +4,7 @@ import 'package:ecommerce_games/views/home/widgets/app_bar_widget.dart';
 import 'package:ecommerce_games/views/home/widgets/product_about_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  ProductController productController = ProductController();
+  ProductController productController = GetIt.I<ProductController>();
 
   @override
   void initState() {

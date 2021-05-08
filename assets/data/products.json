@@ -4,62 +4,72 @@
     "name": "Super Mario Odyssey",
     "price": 197.88,
     "score": 100,
-    "image": "assets/images/super-mario-odyssey.png"
+    "image": "assets/images/super-mario-odyssey.png",
+    "platform": "Nintendo Switch",
+    "content": "Explore lugares incríveis longe do Reino Cogumelo com o Mario e o novo aliado Cappy em uma imensa aventura 3D ao redor do mundo. Use novas habilidades incríveis – como o poder de capturar e controlar objetos, animais, e inimigos – para coletar Power Moons, ligar a aeronave Odyssey e salvar a princesa Peach de se casar com o Bowser!"
   },
   {
     "id": 201,
     "name": "Call Of Duty Infinite Warfare",
     "price": 49.99,
     "score": 80,
-    "image": "assets/images/call-of-duty-infinite-warfare.png"
+    "image": "assets/images/call-of-duty-infinite-warfare.png",
+    "content": "Infinite Warfare possui três modos de jogo únicos: a campanha é um retorno às duras raízes militares da franquia, sem deixar de olhar para frente. O multijogador traz o futuro da guerra, com várias inovações na jogabilidade. E o modo cooperativo Zumbis leva os jogadores em uma louca viagem em uma nova história com recursos e mecânicas de jogabilidade únicas."
   },
   {
     "id": 102,
     "name": "The Witcher III Wild Hunt",
     "price": 119.5,
     "score": 250,
-    "image": "assets/images/the-witcher-iii-wild-hunt.png"
+    "image": "assets/images/the-witcher-iii-wild-hunt.png",
+    "content": "The Witcher: Wild Hunt é um RPG de mundo aberto de fantasia cheio de escolhas vitais. Em The Witcher, você joga como um caçador de monstros profissional, Geralt de Rívia, em busca da criança da profecia em um vasto mundo aberto, rico em cidades mercantis, ilhas piratas, passagens perigosas nas montanhas e cavernas esquecidas a serem exploradas."
   },
   {
     "id": 99,
     "name": "Call Of Duty WWII",
     "price": 249.99,
     "score": 205,
-    "image": "assets/images/call-of-duty-wwii.png"
+    "image": "assets/images/call-of-duty-wwii.png",
+    "content": "A série Call of Duty retorna às raízes com Call of Duty®: WWII, uma experiência espetacular que redefine a Segunda Guerra Mundial para uma nova geração de jogadores. Desembarque na Normandia no Dia D e participe de batalhas por toda a Europa em lugares icônicos da guerra mais monumental da história. Experimente o clássico combate de Call of Duty, os laços de camaradagem, e a natureza implacável da guerra."
   },
   {
     "id": 12,
     "name": "Mortal Kombat XL",
     "price": 69.99,
     "score": 150,
-    "image": "assets/images/mortal-kombat-xl.png"
+    "image": "assets/images/mortal-kombat-xl.png",
+    "content": "Um dos jogos mais vendidos de 2015, agora em tamanho XL! Komplete a experiência de Mortal Kombat X com conteúdos novos e já lançados. A versão inclui o jogo completo e os novos personagens controláveis Alien, Leatherface, Triborg e Bo' Rai Cho. Os personagens controláveis já lançados anteriormente são o Predador, Jason Voorhees, Tremor, Tanya e Goro. Também inclui o novo pacote de skins Apocalíptico."
   },
   {
     "id": 74,
     "name": "Shards of Darkness",
     "price": 71.94,
     "score": 400,
-    "image": "assets/images/shards-of-darkness.png"
+    "image": "assets/images/shards-of-darkness.png",
+    "content": "Explore e domine enormes ambientes abertos, passe furtivamente ou mate novos inimigos e chefes e experimente a nova gama de habilidades e armas letais no arsenal de nosso assassino goblin.\n\nEsgueirar-se sozinho ou com um amigo no modo cooperativo! Escale a estonteante cidade Élfica, atravesse o perigoso território dos Anões e sobreviva a vastas terras inexploradas cheias de perigos letais para cumprir sua missão ... o fracasso em ter sucesso pode ter consequências enormes para seus parentes."
   },
   {
     "id": 31,
     "name": "Terra Média: Sombras de Mordor",
     "price": 79.99,
     "score": 50,
-    "image": "assets/images/terra-media-sombras-de-mordor.png"
+    "image": "assets/images/terra-media-sombras-de-mordor.png",
+    "content": "A trama de Shadow of Mordor é baseada no universo de J. R. R. Tolkien e se passa na Terra-Média, entre os eventos de O Hobbit e O Senhor dos Anéis. O protagonista da trama é Talion, um guardião de Gondor do qual nós convenientemente nunca ouvimos falar, e que fica junto com vários guardiões e sua família no último lugar da Arda em que você gostaria de trazer seus entes queridos: uma estação de vigia, perto do Portão Negro de Mordor."
   },
   {
     "id": 420,
     "name": "FIFA 18",
     "price": 195.39,
     "score": 325,
-    "image": "assets/images/fifa-18.png"
+    "image": "assets/images/fifa-18.png",
+    "content": "Com a tecnologia Frostbite™ e a Tecnologia de Movimentação Real de Jogadores, o EA SPORTS™ FIFA 18 redefine os limites entre o mundo real e o virtual, dando vida aos atletas, times e ambientes que garantem a emoção do maior esporte do mundo. "
   },
   {
     "id": 501,
     "name": "Horizon Zero Dawn",
     "price": 115.8,
     "score": 290,
-    "image": "assets/images/horizon-zero-dawn.png"
+    "image": "assets/images/horizon-zero-dawn.png",
+    "content": "Viva a experiência de Aloy dos Nora em sua busca lendária para desvendar os mistérios de um mundo controlado por Máquinas mortais. Exilada da sua tribo, esta jovem caçadora luta para desvendar seu passado, descobrir seu destino… e deter uma catástrofe futura. Lance ataques táticos devastadores contra Máquinas e também tribos rivais, enquanto explora um mundo aberto cheio de vida selvagem e perigos."
   }
 ]

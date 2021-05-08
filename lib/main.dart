@@ -1,14 +1,19 @@
+import 'package:ecommerce_games/controllers/product_controller.dart';
 import 'package:ecommerce_games/views/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  setupLocator();
 
   runApp(MyApp());
 }
@@ -37,4 +42,8 @@ class MyApp extends StatelessWidget {
       home: HomeView(),
     );
   }
+}
+
+void setupLocator() {
+  GetIt.I.registerSingleton(ProductController());
 }

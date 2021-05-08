@@ -1,7 +1,13 @@
+import 'package:ecommerce_games/controllers/product_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
+import 'package:line_icons/line_icons.dart';
 
 class AppBarWidget extends PreferredSize {
+  ProductController productController = GetIt.I<ProductController>();
+
   @override
   Size get preferredSize => Size.fromHeight(190);
 
@@ -25,10 +31,86 @@ class AppBarWidget extends PreferredSize {
                   color: Colors.grey,
                 ),
               ),
-              Icon(
-                Icons.shopping_cart_outlined,
-                size: 25,
-                color: Colors.grey,
+              Row(
+                children: [
+                  Icon(
+                    Icons.shopping_cart_outlined,
+                    size: 25,
+                    color: Colors.grey,
+                  ),
+                  IconButton(
+                    icon: Observer(
+                      // verifica qual tipo esta selecionado e seta o icone especifico
+                      builder: (_) => Icon(
+                        productController.filterTypeActive ==
+                                whatFilterActive.DEFAULT
+                            ? LineIcons.filter
+                            : productController.filterTypeActive ==
+                                    whatFilterActive.PRICE
+                                ? LineIcons.dollarSign
+                                : productController.filterTypeActive ==
+                                        whatFilterActive.NAME
+                                    ? LineIcons.font
+                                    : LineIcons.star,
+                        size: 25,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    onPressed: () {
+                      return showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Filtrar por:"),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    productController.filterPrice();
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: ListTile(
+                                    leading: Icon(LineIcons.dollarSign),
+                                    title: Text("Preço"),
+                                    trailing: Observer(
+                                      builder: (_) => Icon(
+                                        productController.filterOrderBy ==
+                                                FilterOrderBy.DOWN
+                                            ? LineIcons.sortNumericDown
+                                            : LineIcons.sortNumericUp,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {},
+                                  child: ListTile(
+                                    leading: Icon(LineIcons.star),
+                                    title: Text("Popularidade"),
+                                    trailing: Icon(LineIcons.sortAmountDown),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    productController.filterName();
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: ListTile(
+                                    leading: Icon(LineIcons.font),
+                                    title: Text("Nome"),
+                                    trailing:
+                                        Icon(LineIcons.sortAlphabeticalDown),
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  )
+                ],
               )
             ],
           ),
@@ -45,14 +127,15 @@ class AppBarWidget extends PreferredSize {
             ),
             child: TextField(
               decoration: InputDecoration(
-                  hintText: "Buscar Jogo",
-                  border: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  icon: Icon(
-                    Icons.search,
-                    size: 30,
-                    color: Colors.blue.shade100,
-                  )),
+                hintText: "Buscar Jogo",
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                icon: Icon(
+                  Icons.search,
+                  size: 30,
+                  color: Colors.blue.shade100,
+                ),
+              ),
             ),
           )
         ],
