@@ -9,6 +9,14 @@ part of 'product_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ProductController on _ProductController, Store {
+  Computed<double> _$getTotPriceCartComputed;
+
+  @override
+  double get getTotPriceCart => (_$getTotPriceCartComputed ??= Computed<double>(
+          () => super.getTotPriceCart,
+          name: '_ProductController.getTotPriceCart'))
+      .value;
+
   final _$filterTypeActiveAtom =
       Atom(name: '_ProductController.filterTypeActive');
 
@@ -152,13 +160,25 @@ mixin _$ProductController on _ProductController, Store {
   }
 
   @override
+  void clearCart() {
+    final _$actionInfo = _$_ProductControllerActionController.startAction(
+        name: '_ProductController.clearCart');
+    try {
+      return super.clearCart();
+    } finally {
+      _$_ProductControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 filterTypeActive: ${filterTypeActive},
 filterOrderBy: ${filterOrderBy},
 downPrice: ${downPrice},
 downName: ${downName},
-downScore: ${downScore}
+downScore: ${downScore},
+getTotPriceCart: ${getTotPriceCart}
     ''';
   }
 }

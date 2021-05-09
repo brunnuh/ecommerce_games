@@ -143,21 +143,35 @@ abstract class _ProductController with Store {
   @action
   void addCart(Product product, {int qtd}) {
     if (cartCheckout.contains(product)) {
-      cartCheckout.forEach((Product element) {
-        if (element.id == product.id) {
-          element.qtd += qtd;
-        }
-      });
+      cartCheckout.remove(product);
+      product.qtd += qtd;
     } else {
-      cartCheckout.add(product);
+      product.qtd = qtd;
     }
+    cartCheckout.add(product);
   }
 
   @action
   void removeCart(Product product) {
-    cartCheckout.remove(product);
+    if (cartCheckout.contains(product)) {
+      cartCheckout.remove(product);
+      if (product.qtd > 1) {
+        product.qtd -= 1;
+        cartCheckout.add(product);
+      }
+    }
   }
 
-//Computed
+  @action
+  void clearCart() => cartCheckout.clear();
 
+//Computed
+  @computed
+  double get getTotPriceCart {
+    double totPrice = 0.0;
+    cartCheckout.forEach((element) {
+      totPrice += element.qtd * element.price;
+    });
+    return totPrice;
+  }
 }

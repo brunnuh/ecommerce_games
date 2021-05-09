@@ -1,5 +1,6 @@
 import 'package:ecommerce_games/helpers/extensions.dart';
 import 'package:ecommerce_games/models/product.dart';
+import 'package:ecommerce_games/views/cart/widgets/add_remove_widget.dart';
 import 'package:flutter/material.dart';
 
 class RowProductWidget extends StatelessWidget {
@@ -36,18 +37,20 @@ class RowProductWidget extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.w500),
                 ),
               ),
-              Text.rich(
-                TextSpan(
-                  text: isCheckout ? product.qtd.toString() + "x " : "",
-                  children: [
-                    TextSpan(
-                      text: product.price.toReal(),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
-                  ],
-                ),
+              Column(
+                children: [
+                  Text(
+                    product.price.toReal(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  isCheckout
+                      ? AddRemoveWidget(
+                          product: product,
+                        )
+                      : Container()
+                ],
               )
             ],
           ),
