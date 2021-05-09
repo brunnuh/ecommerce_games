@@ -1,7 +1,9 @@
+import 'package:ecommerce_games/controllers/checkout_controller.dart';
 import 'package:ecommerce_games/controllers/product_controller.dart';
 import 'package:ecommerce_games/helpers/extensions.dart';
 import 'package:ecommerce_games/models/product.dart';
 import 'package:ecommerce_games/views/cart/cart_view.dart';
+import 'package:ecommerce_games/views/checkout/widgets/input_number_widget.dart';
 import 'package:ecommerce_games/views/checkout/widgets/text_value_widget.dart';
 import 'package:ecommerce_games/views/shared/floating_button_widget.dart';
 import 'package:ecommerce_games/views/shared/row_product_widget.dart';
@@ -11,6 +13,7 @@ import 'package:get_it/get_it.dart';
 class CheckoutView extends StatelessWidget {
   final Product product;
   ProductController productController = GetIt.I<ProductController>();
+  CheckoutController checkoutController = GetIt.I<CheckoutController>();
 
   CheckoutView({this.product});
 
@@ -74,19 +77,31 @@ class CheckoutView extends StatelessWidget {
             TextValueWidget(
               title: "Total",
               value: (product.price + 10).toReal(),
+            ),
+            ListTile(
+              leading: Text(
+                "Qtd.",
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              trailing: InputNumberWidget(),
             )
           ],
         ),
       ),
       floatingActionButton: FloatingButtonWidget(
         title: "Adicionar ao carrinho",
-        onTap: () {
-          productController.addCart(product);
+        onTap: () async {
+          productController.addCart(product, qtd: checkoutController.input);
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (_) => CartView(),
             ),
           );
+          await Future.delayed(Duration(seconds: 2));
+          checkoutController.reset();
         },
       ),
     );

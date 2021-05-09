@@ -130,11 +130,11 @@ mixin _$ProductController on _ProductController, Store {
   }
 
   @override
-  void addCart(Product product) {
+  void addCart(Product product, {int qtd}) {
     final _$actionInfo = _$_ProductControllerActionController.startAction(
         name: '_ProductController.addCart');
     try {
-      return super.addCart(product);
+      return super.addCart(product, qtd: qtd);
     } finally {
       _$_ProductControllerActionController.endAction(_$actionInfo);
     }

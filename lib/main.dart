@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 
+import 'controllers/checkout_controller.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -39,16 +41,6 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      onGenerateRoute: (settings) {
-        final args = settings.arguments;
-        switch (settings.name) {
-          case "HomeView":
-          default:
-            return MaterialPageRoute(
-              builder: (_) => HomeView(),
-            );
-        }
-      },
       home: HomeView(),
     );
   }
@@ -56,4 +48,5 @@ class MyApp extends StatelessWidget {
 
 void setupLocator() {
   GetIt.I.registerSingleton(ProductController());
+  GetIt.I.registerSingleton(CheckoutController());
 }

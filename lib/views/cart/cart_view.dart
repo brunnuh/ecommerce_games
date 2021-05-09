@@ -1,5 +1,6 @@
 import 'package:ecommerce_games/controllers/product_controller.dart';
 import 'package:ecommerce_games/models/product.dart';
+import 'package:ecommerce_games/views/home/home_view.dart';
 import 'package:ecommerce_games/views/shared/row_product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -21,8 +22,9 @@ class CartView extends StatelessWidget {
               Icons.arrow_back,
               color: Colors.black,
             ),
-            onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                context, "HomeView", (route) => false)),
+            onPressed: () => Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (_) => HomeView()),
+                (route) => false)),
         centerTitle: true,
       ),
       body: Stack(

@@ -24,7 +24,7 @@ class ProductAboutWidget extends StatelessWidget {
       child: Container(
         clipBehavior: Clip.antiAliasWithSaveLayer,
         width: _size.width,
-        height: _size.width * 0.24,
+        height: 110,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
@@ -46,7 +46,7 @@ class ProductAboutWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   image: AssetImage(product.image),
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),

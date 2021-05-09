@@ -141,15 +141,13 @@ abstract class _ProductController with Store {
   ObservableList<Product> cartCheckout = ObservableList<Product>();
 
   @action
-  void addCart(Product product) {
+  void addCart(Product product, {int qtd}) {
     if (cartCheckout.contains(product)) {
-      // remover elemento duplicado da lista
-      Product productDouble = cartCheckout.removeAt(
-          cartCheckout.indexWhere((element) => element.id == product.id));
-      // adicionar mais 1 pra ele
-      productDouble.qtd = productDouble.qtd + 1;
-      //adicionar a lista novamente
-      cartCheckout.add(productDouble);
+      cartCheckout.forEach((Product element) {
+        if (element.id == product.id) {
+          element.qtd += qtd;
+        }
+      });
     } else {
       cartCheckout.add(product);
     }

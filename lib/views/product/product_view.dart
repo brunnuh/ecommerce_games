@@ -29,29 +29,26 @@ class ProductView extends StatelessWidget {
                 height: 10,
               ),
               OthersDetailsWidget(
-                title: "quantidade",
+                title: "Estoque",
                 iconData: Icons.store_mall_directory,
                 traling: "x${product.id}", // so para representar
               ),
               OthersDetailsWidget(
-                title: "peso",
+                title: "Peso",
                 iconData: LineIcons.weight,
                 traling: "58g",
               ),
-              const SizedBox(
-                height: 20,
-              ),
               Card(
                 child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Text(
                     product.content,
                     style: TextStyle(
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                       fontSize: 16,
                     ),
                   ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 ),
               ),
               const SizedBox(

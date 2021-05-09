@@ -31,6 +31,6 @@ class Product {
 
   @override
   String toString() {
-    return 'Product{id: $id, name: $name, price: $price, score: $score, image: $image} content: $content';
+    return 'Product{id: $id, name: $name, price: $price, score: $score, image: $image} content: $content, qtd: $qtd';
   }
 }
