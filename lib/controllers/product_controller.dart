@@ -8,11 +8,14 @@ part 'product_controller.g.dart';
 
 class ProductController = _ProductController with _$ProductController;
 
+// ordenado de cima para baixo, ou de baixo para cima, ou nenhum
 enum FilterOrderBy { NONE, UP, DOWN }
 
+// qual tipo esta selecionado
 enum whatFilterActive { DEFAULT, PRICE, NAME, SCORE }
 
 abstract class _ProductController with Store {
+  // pega produtos ao ser chamado no main
   _ProductController() {
     getProducts();
   }
@@ -29,6 +32,8 @@ abstract class _ProductController with Store {
   FilterOrderBy filterOrderBy = FilterOrderBy.NONE;
 
   // Action
+
+  // pega produtos do json e serializa para um modelo
   @action
   Future<void> getProducts() async {
     listProducts.clear();
@@ -43,6 +48,7 @@ abstract class _ProductController with Store {
     listProducts.addAll(products);
   }
 
+  // carrega json
   Future _loadJson() async {
     return await rootBundle.loadString("assets/data/products.json");
   }
@@ -53,6 +59,7 @@ abstract class _ProductController with Store {
   @observable
   bool downPrice = true;
 
+  // filtrando por preco
   @action
   void filterPrice() {
     downName = true;
@@ -85,6 +92,7 @@ abstract class _ProductController with Store {
   @observable
   bool downName = true;
 
+  // filtrando por nome
   @action
   void filterName() {
     downPrice = true;
@@ -108,6 +116,7 @@ abstract class _ProductController with Store {
   @observable
   bool downScore = true;
 
+  //filtrando por score
   @action
   void filterScore() {
     downPrice = true;
@@ -140,8 +149,9 @@ abstract class _ProductController with Store {
 
   ObservableList<Product> cartCheckout = ObservableList<Product>();
 
+  // adicionar produtos ao carrinho
   @action
-  void addCart(Product product, {int qtd}) {
+  void addCart(Product product, {int qtd = 1}) {
     if (cartCheckout.contains(product)) {
       cartCheckout.remove(product);
       product.qtd += qtd;
@@ -151,6 +161,7 @@ abstract class _ProductController with Store {
     cartCheckout.add(product);
   }
 
+  // remover produtos do carrinho
   @action
   void removeCart(Product product) {
     if (cartCheckout.contains(product)) {
@@ -162,10 +173,12 @@ abstract class _ProductController with Store {
     }
   }
 
+  // limpar carrinho
   @action
   void clearCart() => cartCheckout.clear();
 
 //Computed
+  // pegar o total do carrinho
   @computed
   double get getTotPriceCart {
     double totPrice = 0.0;
@@ -182,6 +195,7 @@ abstract class _ProductController with Store {
     return totPrice;
   }
 
+  // verificar se o frete gratis
   @computed
   String get freeShipping {
     double totPrice = 0.0;
@@ -192,5 +206,31 @@ abstract class _ProductController with Store {
       return "Frete Gratis";
     }
     return "";
+  }
+
+  @observable
+  String keyWords;
+
+  @action
+  void setKeyWords(String value) => keyWords = value;
+
+  @action
+  void resetKeyWords() => keyWords = null;
+
+  // buscar jogos e devolver uma lista
+  @computed
+  List<Product> get searchProducts {
+    List<Product> searchList = [];
+    if (keyWords != null && keyWords.isNotEmpty) {
+      listProducts.forEach(
+        (Product element) {
+          if (element.name.toLowerCase().contains(keyWords.toLowerCase(), 0) ==
+              true) {
+            searchList.add(element);
+          }
+        },
+      );
+    }
+    return searchList;
   }
 }

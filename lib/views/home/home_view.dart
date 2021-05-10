@@ -19,10 +19,16 @@ class HomeView extends StatelessWidget {
           builder: (_) {
             return productController.listProducts.isNotEmpty
                 ? ListView.builder(
-                    itemCount: productController.listProducts.length,
+                    itemCount: productController.keyWords == null
+                        ? productController.listProducts.length
+                        : productController.searchProducts.length,
                     padding: const EdgeInsets.only(bottom: 10),
                     itemBuilder: (_, index) {
-                      Product product = productController.listProducts[index];
+                      Product product;
+                      if (productController.keyWords == null)
+                        product = productController.listProducts[index];
+                      else
+                        product = productController.searchProducts[index];
                       return ProductAboutWidget(
                         product: product,
                       );

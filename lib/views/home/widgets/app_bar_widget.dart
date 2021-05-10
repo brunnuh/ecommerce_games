@@ -8,6 +8,7 @@ import 'package:line_icons/line_icons.dart';
 
 class AppBarWidget extends PreferredSize {
   ProductController productController = GetIt.I<ProductController>();
+  TextEditingController searchController = TextEditingController();
 
   @override
   Size get preferredSize => Size.fromHeight(190);
@@ -158,17 +159,38 @@ class AppBarWidget extends PreferredSize {
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: "Buscar Jogo",
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                icon: Icon(
-                  Icons.search,
-                  size: 30,
-                  color: Colors.blue.shade100,
-                ),
-              ),
+            child: Observer(
+              builder: (_) {
+                return TextField(
+                  controller: searchController,
+                  onChanged: (value) {
+                    if (value.isEmpty) {
+                      productController.resetKeyWords();
+                    } else {
+                      productController.setKeyWords(value);
+                    }
+                  },
+                  decoration: InputDecoration(
+                    hintText: "Buscar Jogo",
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    suffixIcon: productController.keyWords != null
+                        ? IconButton(
+                            icon: Icon(Icons.clear),
+                            onPressed: () {
+                              searchController.clear();
+                              productController.resetKeyWords();
+                            },
+                          )
+                        : Container(),
+                    icon: Icon(
+                      Icons.search,
+                      size: 30,
+                      color: Colors.blue.shade100,
+                    ),
+                  ),
+                );
+              },
             ),
           )
         ],

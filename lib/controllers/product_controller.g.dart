@@ -23,6 +23,13 @@ mixin _$ProductController on _ProductController, Store {
       (_$freeShippingComputed ??= Computed<String>(() => super.freeShipping,
               name: '_ProductController.freeShipping'))
           .value;
+  Computed<List<Product>> _$searchProductsComputed;
+
+  @override
+  List<Product> get searchProducts => (_$searchProductsComputed ??=
+          Computed<List<Product>>(() => super.searchProducts,
+              name: '_ProductController.searchProducts'))
+      .value;
 
   final _$filterTypeActiveAtom =
       Atom(name: '_ProductController.filterTypeActive');
@@ -100,6 +107,21 @@ mixin _$ProductController on _ProductController, Store {
     });
   }
 
+  final _$keyWordsAtom = Atom(name: '_ProductController.keyWords');
+
+  @override
+  String get keyWords {
+    _$keyWordsAtom.reportRead();
+    return super.keyWords;
+  }
+
+  @override
+  set keyWords(String value) {
+    _$keyWordsAtom.reportWrite(value, super.keyWords, () {
+      super.keyWords = value;
+    });
+  }
+
   final _$getProductsAsyncAction =
       AsyncAction('_ProductController.getProducts');
 
@@ -145,7 +167,7 @@ mixin _$ProductController on _ProductController, Store {
   }
 
   @override
-  void addCart(Product product, {int qtd}) {
+  void addCart(Product product, {int qtd = 1}) {
     final _$actionInfo = _$_ProductControllerActionController.startAction(
         name: '_ProductController.addCart');
     try {
@@ -178,6 +200,28 @@ mixin _$ProductController on _ProductController, Store {
   }
 
   @override
+  void setKeyWords(String value) {
+    final _$actionInfo = _$_ProductControllerActionController.startAction(
+        name: '_ProductController.setKeyWords');
+    try {
+      return super.setKeyWords(value);
+    } finally {
+      _$_ProductControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void resetKeyWords() {
+    final _$actionInfo = _$_ProductControllerActionController.startAction(
+        name: '_ProductController.resetKeyWords');
+    try {
+      return super.resetKeyWords();
+    } finally {
+      _$_ProductControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 filterTypeActive: ${filterTypeActive},
@@ -185,8 +229,10 @@ filterOrderBy: ${filterOrderBy},
 downPrice: ${downPrice},
 downName: ${downName},
 downScore: ${downScore},
+keyWords: ${keyWords},
 getTotPriceCart: ${getTotPriceCart},
-freeShipping: ${freeShipping}
+freeShipping: ${freeShipping},
+searchProducts: ${searchProducts}
     ''';
   }
 }
