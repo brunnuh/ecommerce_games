@@ -169,9 +169,28 @@ abstract class _ProductController with Store {
   @computed
   double get getTotPriceCart {
     double totPrice = 0.0;
+    // somar a qtd * preco de cada produto
     cartCheckout.forEach((element) {
       totPrice += element.qtd * element.price;
     });
+    if (totPrice < 250) {
+      // somar a cada produto 10 de frete caso o total seja menor que 250
+      cartCheckout.forEach((element) {
+        totPrice += element.qtd * 10;
+      });
+    }
     return totPrice;
+  }
+
+  @computed
+  String get freeShipping {
+    double totPrice = 0.0;
+    cartCheckout.forEach((element) {
+      totPrice += element.qtd * element.price;
+    });
+    if (totPrice > 250) {
+      return "Frete Gratis";
+    }
+    return "";
   }
 }

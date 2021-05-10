@@ -1,4 +1,5 @@
 import 'package:ecommerce_games/controllers/product_controller.dart';
+import 'package:ecommerce_games/views/cart/cart_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -33,10 +34,17 @@ class AppBarWidget extends PreferredSize {
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.shopping_cart_outlined,
-                    size: 25,
-                    color: Colors.grey,
+                  IconButton(
+                    icon: Icon(
+                      Icons.shopping_cart_outlined,
+                      size: 25,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => CartView(),
+                      ),
+                    ),
                   ),
                   IconButton(
                     icon: Observer(

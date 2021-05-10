@@ -16,6 +16,13 @@ mixin _$ProductController on _ProductController, Store {
           () => super.getTotPriceCart,
           name: '_ProductController.getTotPriceCart'))
       .value;
+  Computed<String> _$freeShippingComputed;
+
+  @override
+  String get freeShipping =>
+      (_$freeShippingComputed ??= Computed<String>(() => super.freeShipping,
+              name: '_ProductController.freeShipping'))
+          .value;
 
   final _$filterTypeActiveAtom =
       Atom(name: '_ProductController.filterTypeActive');
@@ -178,7 +185,8 @@ filterOrderBy: ${filterOrderBy},
 downPrice: ${downPrice},
 downName: ${downName},
 downScore: ${downScore},
-getTotPriceCart: ${getTotPriceCart}
+getTotPriceCart: ${getTotPriceCart},
+freeShipping: ${freeShipping}
     ''';
   }
 }
