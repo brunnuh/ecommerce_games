@@ -22,6 +22,7 @@ class CheckoutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    checkoutController.setPrice(product.price);
     return Scaffold(
       appBar: AppBar(
         title: Text(

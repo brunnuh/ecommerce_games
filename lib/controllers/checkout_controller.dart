@@ -47,6 +47,8 @@ abstract class _CheckoutController with Store {
   @computed
   String get freeShipping =>
       input * price > 250 ? "Frete Gratis" : (input * 10.0).toReal();
+
+  @computed
   String get shippingPrice => input * price > 250
       ? (input * price).toReal()
       : (input * (price + 10)).toReal();

@@ -1,5 +1,7 @@
 # ecommerce_games
 
+![alt_text](assets/mockup.gif)
+
 ecommerce de games
 
 ## Getting Started

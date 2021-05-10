@@ -16,6 +16,13 @@ mixin _$CheckoutController on _CheckoutController, Store {
       (_$freeShippingComputed ??= Computed<String>(() => super.freeShipping,
               name: '_CheckoutController.freeShipping'))
           .value;
+  Computed<String> _$shippingPriceComputed;
+
+  @override
+  String get shippingPrice =>
+      (_$shippingPriceComputed ??= Computed<String>(() => super.shippingPrice,
+              name: '_CheckoutController.shippingPrice'))
+          .value;
 
   final _$inputAtom = Atom(name: '_CheckoutController.input');
 
@@ -99,7 +106,8 @@ mixin _$CheckoutController on _CheckoutController, Store {
     return '''
 input: ${input},
 price: ${price},
-freeShipping: ${freeShipping}
+freeShipping: ${freeShipping},
+shippingPrice: ${shippingPrice}
     ''';
   }
 }
