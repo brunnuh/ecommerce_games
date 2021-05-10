@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 extension RealExtension on double {
   String toReal() {
-    var realFormat = NumberFormat("###0.00", "pt_BR");
+    var realFormat = NumberFormat(",##0.00", "pt_BR");
     return "R\$ " + realFormat.format(this);
   }
 }
