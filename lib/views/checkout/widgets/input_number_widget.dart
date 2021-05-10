@@ -9,8 +9,8 @@ class InputNumberWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 95,
-      height: 40,
+      width: 80,
+      height: 30,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(5),

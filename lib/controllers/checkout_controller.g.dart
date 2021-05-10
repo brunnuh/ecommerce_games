@@ -9,6 +9,14 @@ part of 'checkout_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CheckoutController on _CheckoutController, Store {
+  Computed<String> _$freeShippingComputed;
+
+  @override
+  String get freeShipping =>
+      (_$freeShippingComputed ??= Computed<String>(() => super.freeShipping,
+              name: '_CheckoutController.freeShipping'))
+          .value;
+
   final _$inputAtom = Atom(name: '_CheckoutController.input');
 
   @override
@@ -21,6 +29,21 @@ mixin _$CheckoutController on _CheckoutController, Store {
   set input(int value) {
     _$inputAtom.reportWrite(value, super.input, () {
       super.input = value;
+    });
+  }
+
+  final _$priceAtom = Atom(name: '_CheckoutController.price');
+
+  @override
+  double get price {
+    _$priceAtom.reportRead();
+    return super.price;
+  }
+
+  @override
+  set price(double value) {
+    _$priceAtom.reportWrite(value, super.price, () {
+      super.price = value;
     });
   }
 
@@ -50,6 +73,17 @@ mixin _$CheckoutController on _CheckoutController, Store {
   }
 
   @override
+  void setPrice(double value) {
+    final _$actionInfo = _$_CheckoutControllerActionController.startAction(
+        name: '_CheckoutController.setPrice');
+    try {
+      return super.setPrice(value);
+    } finally {
+      _$_CheckoutControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void reset() {
     final _$actionInfo = _$_CheckoutControllerActionController.startAction(
         name: '_CheckoutController.reset');
@@ -63,7 +97,9 @@ mixin _$CheckoutController on _CheckoutController, Store {
   @override
   String toString() {
     return '''
-input: ${input}
+input: ${input},
+price: ${price},
+freeShipping: ${freeShipping}
     ''';
   }
 }

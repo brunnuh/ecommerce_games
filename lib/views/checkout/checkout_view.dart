@@ -8,14 +8,28 @@ import 'package:ecommerce_games/views/checkout/widgets/text_value_widget.dart';
 import 'package:ecommerce_games/views/shared/floating_button_widget.dart';
 import 'package:ecommerce_games/views/shared/row_product_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
-class CheckoutView extends StatelessWidget {
+class CheckoutView extends StatefulWidget {
   final Product product;
-  ProductController productController = GetIt.I<ProductController>();
-  CheckoutController checkoutController = GetIt.I<CheckoutController>();
 
   CheckoutView({this.product});
+
+  @override
+  _CheckoutViewState createState() => _CheckoutViewState();
+}
+
+class _CheckoutViewState extends State<CheckoutView> {
+  ProductController productController = GetIt.I<ProductController>();
+
+  CheckoutController checkoutController = GetIt.I<CheckoutController>();
+
+  @override
+  void initState() {
+    super.initState();
+    checkoutController.setPrice(widget.product.price);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +38,13 @@ class CheckoutView extends StatelessWidget {
         title: Text(
           "Checkout",
           style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+            checkoutController.reset();
+          },
         ),
         centerTitle: true,
       ),
@@ -43,7 +64,7 @@ class CheckoutView extends StatelessWidget {
               height: 20,
             ),
             RowProductWidget(
-              product: product,
+              product: widget.product,
             ),
             const SizedBox(
               height: 20,
@@ -67,16 +88,19 @@ class CheckoutView extends StatelessWidget {
             ),
             TextValueWidget(
               title: "Item",
-              value: product.price.toReal(),
+              value: widget.product.price.toReal(),
             ),
-            TextValueWidget(title: "Frete", value: "R\$ 10,00"),
-            TextValueWidget(
-              title: "Sub Total",
-              value: (product.price + 10).toReal(),
+            Observer(
+              builder: (_) => TextValueWidget(
+                title: "Frete",
+                value: checkoutController.freeShipping,
+              ),
             ),
-            TextValueWidget(
-              title: "Total",
-              value: (product.price + 10).toReal(),
+            Observer(
+              builder: (_) => TextValueWidget(
+                title: "Sub Total",
+                value: checkoutController.shippingPrice,
+              ),
             ),
             ListTile(
               leading: Text(
@@ -94,7 +118,8 @@ class CheckoutView extends StatelessWidget {
       floatingActionButton: FloatingButtonWidget(
         title: "Adicionar ao carrinho",
         onTap: () async {
-          productController.addCart(product, qtd: checkoutController.input);
+          productController.addCart(widget.product,
+              qtd: checkoutController.input);
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (_) => CartView(),

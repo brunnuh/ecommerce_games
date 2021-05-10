@@ -14,7 +14,6 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
   setupLocator();
 
   runApp(MyApp());

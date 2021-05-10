@@ -1,3 +1,4 @@
+import 'package:ecommerce_games/helpers/extensions.dart';
 import 'package:mobx/mobx.dart';
 
 part 'checkout_controller.g.dart';
@@ -8,6 +9,9 @@ abstract class _CheckoutController with Store {
   // Observers
   @observable
   int input = 1;
+
+  @observable
+  double price = 0;
 
   // Action
   @action
@@ -31,8 +35,19 @@ abstract class _CheckoutController with Store {
   }
 
   @action
-  void reset() => input = 1;
+  void setPrice(double value) => price = value;
+
+  @action
+  void reset() {
+    input = 1;
+    price = 0;
+  }
 
   //Computed
-
+  @computed
+  String get freeShipping =>
+      input * price > 250 ? "Frete Gratis" : (input * 10.0).toReal();
+  String get shippingPrice => input * price > 250
+      ? (input * price).toReal()
+      : (input * (price + 10)).toReal();
 }
