@@ -9,7 +9,7 @@ class InputNumberWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 80,
+      width: 90,
       height: 30,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
@@ -19,27 +19,31 @@ class InputNumberWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: [
-          GestureDetector(
-            child: Container(
-              child: Icon(
-                Icons.remove,
-                size: 25,
+          Expanded(
+            child: GestureDetector(
+              child: Container(
+                child: Icon(
+                  Icons.remove,
+                  size: 25,
+                ),
               ),
+              onTap: checkoutController.remove,
             ),
-            onTap: checkoutController.remove,
           ),
           Observer(
             builder: (_) => Text(
               checkoutController.input.toString(),
-              style: TextStyle(fontSize: 25),
+              style: TextStyle(fontSize: 20),
             ),
           ),
-          GestureDetector(
-            child: Icon(
-              Icons.add,
-              size: 25,
+          Expanded(
+            child: GestureDetector(
+              child: Icon(
+                Icons.add,
+                size: 25,
+              ),
+              onTap: checkoutController.add,
             ),
-            onTap: checkoutController.add,
           ),
         ],
       ),

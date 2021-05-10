@@ -100,11 +100,27 @@ class CartView extends StatelessWidget {
                 height: 100,
                 child: InkWell(
                   onLongPress: () {
+                    productController.clearCart();
                     return showDialog(
                       context: context,
                       builder: (context) {
                         return AlertDialog(
+                          title: Icon(
+                            LineIcons.check,
+                            color: Colors.green,
+                            size: 35,
+                          ),
                           content: Text("Compra efetuada com sucesso!"),
+                          actions: [
+                            FlatButton(
+                              onPressed: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => HomeView(),
+                                ),
+                              ),
+                              child: Text("Ok"),
+                            )
+                          ],
                         );
                       },
                     );
@@ -112,7 +128,7 @@ class CartView extends StatelessWidget {
                   child: Observer(
                     builder: (_) {
                       return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,

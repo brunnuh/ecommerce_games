@@ -11,25 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 
-class CheckoutView extends StatefulWidget {
+class CheckoutView extends StatelessWidget {
   final Product product;
 
   CheckoutView({this.product});
 
-  @override
-  _CheckoutViewState createState() => _CheckoutViewState();
-}
-
-class _CheckoutViewState extends State<CheckoutView> {
   ProductController productController = GetIt.I<ProductController>();
 
   CheckoutController checkoutController = GetIt.I<CheckoutController>();
-
-  @override
-  void initState() {
-    super.initState();
-    checkoutController.setPrice(widget.product.price);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +53,7 @@ class _CheckoutViewState extends State<CheckoutView> {
               height: 20,
             ),
             RowProductWidget(
-              product: widget.product,
+              product: product,
             ),
             const SizedBox(
               height: 20,
@@ -88,7 +77,7 @@ class _CheckoutViewState extends State<CheckoutView> {
             ),
             TextValueWidget(
               title: "Item",
-              value: widget.product.price.toReal(),
+              value: product.price.toReal(),
             ),
             Observer(
               builder: (_) => TextValueWidget(
@@ -118,8 +107,7 @@ class _CheckoutViewState extends State<CheckoutView> {
       floatingActionButton: FloatingButtonWidget(
         title: "Adicionar ao carrinho",
         onTap: () async {
-          productController.addCart(widget.product,
-              qtd: checkoutController.input);
+          productController.addCart(product, qtd: checkoutController.input);
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (_) => CartView(),

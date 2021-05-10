@@ -20,7 +20,7 @@ abstract class _CheckoutController with Store {
       input += 1;
     }
     if (input == 101) {
-      input = 0;
+      input = 1;
     }
   }
 
